@@ -1,50 +1,57 @@
 import React, { useState, useEffect } from "react";
 import Form from "./components/Form";
+import TeamCard from './components/TeamCard';
 import teamMembers from "./team";
 import "./App.css";
+import { Row, Container } from "reactstrap";
+import TeamCardForm from "./components/TeamCardForm";
 
 function App() {
   const [team, setTeam] = useState(teamMembers);
-  const [teamQuery, setTeamQuery] = useState({
-    name: "",
-    email: "",
-    role: ""
-  });
+  const [memberToEdit, setMemberToEdit] = useState();
 
-  useEffect(() => {
-    const tempTeam = teamMembers.filter(team => {
-      return (
-        team.name.toLowerCase().includes(teamQuery.name.toLowerCase()) &&
-        team.email.toLowerCase().includes(teamQuery.email.toLowerCase()) &&
-        team.role.toLowerCase().includes(teamQuery.role.toLowerCase())
-      );
-    });
+  useEffect(()=> {
 
-    setTeam(tempTeam);
-  }, [teamQuery]);
+  }, [team])
 
-  const submitSearch = query => {
-    setTeamQuery(query);
-  };
+  const editMember = (member) => {
+    setTeam(prevState => prevState.map(prevStateMember => {
+      if(member.id === prevStateMember.id){
+        return member;
+      }
+      return prevStateMember;
+    }))
+  }
+
   return (
     <div className="App">
       <Form
-        submitSearch={submitSearch}
+        setTeam={setTeam}
+        team={team}
+        memberToEdit={memberToEdit}
+        setMemberToEdit={setMemberToEdit}
       />
-      {team.map(person => {
-        return (
-          <div key={person.id} className="team-wrapper">
-            <div className="team-image">
-              <img alt={person.name} src={person.image} />
-            </div>
-            <div className="info-wrapper">
-              <h2>{person.name}</h2>
-              <p>Role: {person.role}</p>
-              <p>Email: {person.email}</p>
-            </div>
-          </div>
-        );
-      })}
+      <Container>
+        <Row xs={1} sm={2} md={3} lg={4}>
+          {team.map(person => {
+            if(memberToEdit && memberToEdit.id === person.id){
+              return <TeamCardForm 
+                  key={person.id}
+                  member={person} 
+                  editMember={editMember}
+                  setMemberToEdit={setMemberToEdit}
+                  memberToEdit={memberToEdit} />
+            }
+            return (
+                <TeamCard 
+                  key={person.id}
+                  member={person} 
+                  setMemberToEdit={setMemberToEdit}
+                  memberToEdit={memberToEdit} />
+            );
+          })}
+        </Row>
+      </Container>
     </div>
   );
 }

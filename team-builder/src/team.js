@@ -4,21 +4,21 @@ const team = [
         name: 'Tony Balogne',
         role: 'Frontend Developer',
         email: 'tonyb@gmail.com',
-        image: 'https://www.thispersondoesnotexist.com/image'
+        image: 'https://loremflickr.com/320/240'
     },
     {
         id: 1,
         name: 'Frederick Wright',
         role: 'Backend Developer',
         email: 'fwright@hotmail.com',
-        image: 'https://www.thispersondoesnotexist.com/image'
+        image: 'https://loremflickr.com/320/240'
     },
     {
         id: 2,
         name: 'Greg Burton',
         role: 'UI Designer',
         email: 'burton94556@aol.com',
-        image: 'https://www.thispersondoesnotexist.com/image'
+        image: 'https://loremflickr.com/320/240'
     },
     {
         id: 3,

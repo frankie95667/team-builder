@@ -1,12 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-const Form = ({submitSearch}) => {
+const Form = (props) => {
 
     const [team, setTeam] = useState({
+        id: props.team.length,
         name: '',
         email: '',
-        role: ''
+        role: '',
+        image: 'https://loremflickr.com/320/240'
     })
+
+    useEffect(()=> {
+    }, [props.memberToEdit])
 
     const handleChange = e => {
         setTeam({
@@ -17,12 +22,21 @@ const Form = ({submitSearch}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        submitSearch(team);
+        addMember();
         setTeam({
             name: '',
             email: '',
-            role: ''
+            role: '',
+            image: 'https://loremflickr.com/320/240'
         })
+        
+    }
+
+    const addMember = () => {
+        props.setTeam(prevTeam => [
+            ...prevTeam,
+            team
+        ])
     }
 
     return (
