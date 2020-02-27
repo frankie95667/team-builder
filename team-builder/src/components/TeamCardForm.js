@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Card, CardBody, CardTitle, CardText, CardImg, Container, Col, Button} from 'reactstrap';
+import {Card, CardBody, CardTitle, CardText, CardImg, Container, Col, Button, Label, Input} from 'reactstrap';
 
 const TeamCardForm = ({member, setMemberToEdit, editMember}) => {
     const [memberInputs, setMemberInputs] = useState(member);
@@ -25,20 +25,25 @@ const TeamCardForm = ({member, setMemberToEdit, editMember}) => {
                     <CardImg src={memberInputs.image} />
                     <form onSubmit={onSubmit}>
                     <CardBody>
-                       
-                    <input 
+                    <Label htmlFor="edit_name">Name</Label>
+                    <Input 
+                        id="edit_name"
                         onChange={handleChange} 
                         name="name" 
                         type="text" 
                         value={memberInputs.name}
                         placeholder="Enter name..." />
-                    <input 
+                    <Label htmlFor="edit_email">Email</Label>
+                    <Input 
+                        id="edit_email"
                         onChange={handleChange} 
                         name="email" 
                         type="text" 
                         value={memberInputs.email}
                         placeholder="Enter email..." />
-                    <input 
+                    <Label htmlFor="edit_role">Role</Label>
+                    <Input 
+                        id="edit_role"
                         onChange={handleChange} 
                         name="role" 
                         type="text" 
